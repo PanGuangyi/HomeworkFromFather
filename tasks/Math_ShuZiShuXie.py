@@ -5,13 +5,13 @@ class Math_ShuZiShuXie():
 
     def __init__(self):
         self.upper_limit=100
-        self.count_limit=200
-        self.paper_size = "A4"
+        self.count_limit=100
+        self.paper_size = "A4" #15 figures* 17 lines* fonts_size 16
         
         
     def create_homework(self):
         if self.paper_size == "A4":
-            self.num_perline = 20
+            self.num_perline = 15
         else:
             self.num_perline = 15
 
