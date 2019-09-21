@@ -1,52 +1,32 @@
 import wx
+from wx import xrc
 
 
-# Some classes to use for the notebook pages.  Obviously you would
-# want to use something more meaningful for your application, these
-# are just for illustration.
+class HFF(wx.App):
 
-class PageOne(wx.Panel):
-    def __init__(self, parent):
-        wx.Panel.__init__(self, parent)
-        t = wx.StaticText(self, -1, "This is a PageOne object", (20,20))
+    def OnInit(self):
+        self.res = xrc.XmlResource('HFF.xrc')
+        self.init_frame()
+        return True
 
-class PageTwo(wx.Panel):
-    def __init__(self, parent):
-        wx.Panel.__init__(self, parent)
-        t = wx.StaticText(self, -1, "This is a PageTwo object", (40,40))
+    def init_frame(self):
+        self.frame = self.res.LoadFrame(None, 'mainFrame')
+        self.panel = xrc.XRCCTRL(self.frame, 'panel')
+        self.nb_main = xrc.XRCCTRL(self.panel, 'nb_main')
+        self.page1 = xrc.XRCCTRL(self.panel, 'nb_page_1')
+        self.page1_panel = xrc.XRCCTRL(self.panel, 'page_1_panel')
+        self.page1_btn = xrc.XRCCTRL(self.page1_panel, 'my_button')
+        
+        #self.text1 = xrc.XRCCTRL(self.panel, 'text1')
+        #self.text2 = xrc.XRCCTRL(self.panel, 'text2')
+        #self.frame.Bind(wx.EVT_BUTTON, self.OnSubmit, id=xrc.XRCID('button'))
+        self.frame.Show()
 
-class PageThree(wx.Panel):
-    def __init__(self, parent):
-        wx.Panel.__init__(self, parent)
-        t = wx.StaticText(self, -1, "This is a PageThree object", (60,60))
+    #def OnSubmit(self, evt):
+    #    wx.MessageBox('Your name is %s %s!' %
+    #        (self.text1.GetValue(), self.text2.GetValue()), 'Feedback')
+    #
 
-
-class MainFrame(wx.Frame):
-    def __init__(self):
-        wx.Frame.__init__(self, None, title="Simple Notebook Example")
-
-        # Here we create a panel and a notebook on the panel
-        p = wx.Panel(self)
-        nb = wx.Notebook(p)
-
-        # create the page windows as children of the notebook
-        page1 = PageOne(nb)
-        page2 = PageTwo(nb)
-        page3 = PageThree(nb)
-
-        # add the pages to the notebook with the label to show on the tab
-        nb.AddPage(page1, "通用")
-        nb.AddPage(page2, "Page 2")
-        nb.AddPage(page3, "Page 3")
-
-        # finally, put the notebook in a sizer for the panel to manage
-        # the layout
-        sizer = wx.BoxSizer()
-        sizer.Add(nb, 1, wx.EXPAND)
-        p.SetSizer(sizer)
-
-
-if __name__ == "__main__":
-    app = wx.App()
-    MainFrame().Show()
+if __name__ == '__main__':
+    app = HFF(False)
     app.MainLoop()
