@@ -2,26 +2,24 @@
 
 import sys
 
-import Homework as hw
-from Math_TuiWeiJianFa import Math_TuiWeiJianFa
-from Math_FuHaoShiBie import Math_FuHaoShiBie
-from Math_ShuZiShuXie import Math_ShuZiShuXie
+import tasks.Homework as hw
+from tasks.Math_TuiWeiJianFa import Math_TuiWeiJianFa
+from tasks.Math_FuHaoShiBie import Math_FuHaoShiBie
+from tasks.Math_ShuZiShuXie import Math_ShuZiShuXie
 
 
 
-if __name__ == '__main__':
+class HomeworkCreator():
     
-    #register home work
-    hw.factory.register_homework("Math_TuiWeiJianFa",Math_TuiWeiJianFa)
-    hw.factory.register_homework("Math_FuHaoShiBie",Math_FuHaoShiBie)
-    hw.factory.register_homework("Math_ShuZiShuXie",Math_ShuZiShuXie)
+    def __init__(self,task_name):
     
-    
-    for item in sys.argv[1:]:
-        if hw.factory.is_homework_exist(item):
-            myhomework = hw.factory.get_homework(item)
+        #register home work
+        hw.factory.register_homework(task_name,eval(task_name))        
+
+        if hw.factory.is_homework_exist(task_name):
+            myhomework = hw.factory.get_homework(task_name)
             myhomework.create_homework()
         else:
-            print(item+"不存在！")
-    
-    
+            print(task_name+"不存在！")
+
+
