@@ -4,9 +4,11 @@ Homework from father.
 This this a homework creator that use to create homework for my son.
 Good luck to him.
 
+Please use Python 3.
+
 usage:
 
-python HomeworkCreator.py homework_name
+python HFF.py
 
 homework_name supported now:
 
